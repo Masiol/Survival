@@ -9,9 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     [HideInInspector] public GameOptions options = null;
     [HideInInspector] public ResourcesDataBase resources = null;
-
-
-
     private void Awake()
     {
         if (instance == null)

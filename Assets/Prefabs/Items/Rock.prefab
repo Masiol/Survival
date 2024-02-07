@@ -55,25 +55,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4120241128697959865, guid: 0c530b0565dee6d419f4668e90d711ac, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c530b0565dee6d419f4668e90d711ac, type: 3}
---- !u!1 &4766334358628734749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1765895908240296, guid: 0c530b0565dee6d419f4668e90d711ac, type: 3}
-  m_PrefabInstance: {fileID: 4765703177244523701}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1091668607012220525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4766334358628734749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e91f4ae79da5b4f9ff22d050c3dadf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Rock
-  item: {fileID: 0}

@@ -15,6 +15,12 @@ public class Outlineable : MonoBehaviour, IOutlineable
     }
     public void SetOutline(bool outlineEnabled)
     {
-        outline.enabled = outlineEnabled;
+        if (outline == null)
+            outline = GetComponent<Outline>();
+
+        if (outline != null) // Additional check in case the Outline component is missing
+            outline.enabled = outlineEnabled;
+        else
+            Debug.LogWarning("Outline component missing on " + gameObject.name);
     }
 }

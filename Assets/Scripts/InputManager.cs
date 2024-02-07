@@ -8,18 +8,20 @@ public class InputManager : MonoBehaviour
     public event System.Action<Vector2> OnMove;
     public event System.Action<Vector2> OnLook;
     public event System.Action<bool> OnJump;
-    public event System.Action<bool> OnInventory;
+    public event System.Action OnInventory;
     public event System.Action<bool> StopPlayer;
 
     public event System.Action OnInteract;
     public event System.Action OnPickup;
-    public event System.Action OnHold;
+    public event System.Action OnGrab;
+    public event System.Action Cancel;
+    public event System.Action OnInventoryDropItem;
+    public event System.Action<int> OnInteractHotBar;
+
+    public event System.Action OnItemUse;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
     public float StrafeDirection { get; private set; }
-
-
-    private bool inventoryToggle = false;
 
     private PlayerInputSystem inputSystem;
 
@@ -66,25 +68,34 @@ public class InputManager : MonoBehaviour
 
         inputSystem.Player.Interact.performed += ctx => OnInteract?.Invoke();
         inputSystem.Player.Pickup.performed += ctx => OnPickup?.Invoke();
-        inputSystem.Player.Hold.performed += ctx => OnHold?.Invoke();
+        inputSystem.Player.Hold.performed += ctx => OnGrab?.Invoke();
 
-        inputSystem.Player.Inventory.performed += ctx => ToggleInventory();
-    } 
+        inputSystem.Player.Escape.performed += ctx => Cancel?.Invoke();
+
+        inputSystem.Player.UseItem.performed += ctx => OnItemUse?.Invoke();
+
+        //zmienic na UI
+        inputSystem.Player.InventoryDropItem.performed += ctx => OnInventoryDropItem?.Invoke();
+        inputSystem.Player.Inventory.performed += ctx => OnInventory?.Invoke();
+        //zmienic na UI
+        inputSystem.UI.Key1.performed += ctx => OnInteractHotBar.Invoke(1);
+        inputSystem.UI.Key2.performed += ctx => OnInteractHotBar.Invoke(2);
+        inputSystem.UI.Key3.performed += ctx => OnInteractHotBar.Invoke(3);
+        inputSystem.UI.Key4.performed += ctx => OnInteractHotBar.Invoke(4);
+        inputSystem.UI.Key5.performed += ctx => OnInteractHotBar.Invoke(5);
+        inputSystem.UI.Key6.performed += ctx => OnInteractHotBar.Invoke(6);
+        inputSystem.UI.Key7.performed += ctx => OnInteractHotBar.Invoke(7);
+
+    }
     private void OnEnable()
     {
         inputSystem.Player.Enable();
+        inputSystem.UI.Enable();
     }
 
     private void OnDisable()
     {
         inputSystem.Player.Disable();
-    }
-
-    private void ToggleInventory()
-    {
-        inventoryToggle = !inventoryToggle;
-        OnInventory?.Invoke(inventoryToggle);
-
-        StopPlayer?.Invoke(!inventoryToggle);
+        inputSystem.UI.Disable();
     }
 }

@@ -1,97 +1,253 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
+public enum ItemType
+{ 
+    Default,
+    Weapon, 
+    Consumable, 
+    Tool,
+    Resources
+}
 public class Inventory : MonoBehaviour
 {
+    public GameObject inventorySlotsParent;
+    public GameObject hotbarSlotsParent;
+    public GameObject hotbarSlotsBackgroundParent;
+    public Image dragIconImage;
     
-    public static Inventory instance = null;
+    private List<Slot> inventorySlots = new List<Slot>();
+    private List<Slot> hotbarInventorySlots = new List<Slot>();
+    private List<Image> hotbarBackgroundSlots = new List<Image>();
+    private List<Slot> allInventorySlots = new List<Slot>();
+    private ItemSO currentDraggedItem;
+    private int currentDragSlotIndex = -1;
 
+    public event System.Action<HandItemSO> OnHoldItem;
 
-    [SerializeField] private GameObject InventoryObject;
-    [HideInInspector] public InventoryPanel inventoryPanel = null;
-    [HideInInspector] public PanelOptions panelOptions = null;
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
     private void Start()
     {
-        InputManager.Instance.OnInventory += ShowHideInventory;
-        Init();       
+        InitializeInventory();
+    }
+    private void InitializeInventory()
+    {
+        GetSlots();
+        SubscribeToEvents();
+        HotBarSelected(1);
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnInventory -= ShowHideInventory;
+        UnsubscribeEvents();
     }
 
-    public void Init()
+    private void SubscribeToEvents()
     {
-        inventoryPanel = GetComponentInChildren<InventoryPanel>();
-        inventoryPanel.Init();
-
-        panelOptions = GetComponentInChildren<PanelOptions>();
-        panelOptions.Init();
-
-        InventoryObject.SetActive(false);
-        
+        InputManager.Instance.OnInventoryDropItem += DropItem;
+        InputManager.Instance.OnInteractHotBar += HotBarSelected;
     }
-
-    public void ShowHideInventory(bool _showInventory)
+    private void UnsubscribeEvents()
     {
-        InventoryObject.SetActive(_showInventory);
-
-        GameManager.instance.SetCursor(_showInventory);
+        InputManager.Instance.OnInventoryDropItem -= DropItem;
+        InputManager.Instance.OnInteractHotBar -= HotBarSelected;
     }
 
-    public bool AddItems(Item _item)
-    {   
-        Debug.Log("inventory item");
-    
-        if (_item == null || _item.itemQuantity <= 0)
-            return false;
-
-        List<Slot> listSlots = GetSlots(inventoryPanel.grid);
-        if (listSlots.Count <= 0)
-            return false;
-
-        Slot slotFound = listSlots.FirstOrDefault(
-            s => s.currentItem != null 
-            && s.currentItem.stackable 
-            && s.currentItem.itemQuantity + _item.itemQuantity <= _item.maxItemQuantity);
-
-        if(slotFound != null)
+    private void Update()
+    {
+        HandleDragAndDrop();
+    }
+    private void HandleDragAndDrop()
+    {
+        if (gameObject.activeInHierarchy && Input.GetMouseButtonDown(0))
         {
-            slotFound.currentItem.itemQuantity += _item.itemQuantity;
-            slotFound.Refresh();
+            DragInventoryIcon();
+        }
+        else if (currentDragSlotIndex != -1 && Input.GetMouseButtonUp(0) || currentDragSlotIndex != -1 && !gameObject.activeInHierarchy)
+        {
+            DropInventoryIcon();
+        }
+        dragIconImage.transform.position = Input.mousePosition;
+    }
+    public void AddItemToInventory(ItemSO _itemToAdd)
+    {
+        int leftoverQuantity = _itemToAdd.itemQuantity;
+        Slot openSlot = null;
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            ItemSO heldItem = allInventorySlots[i].GetItem();
+
+            if (heldItem != null && _itemToAdd.name == heldItem.name)
+            {
+                int freeSpaceInSlot = heldItem.maxItemQuantity - heldItem.itemQuantity;
+
+                if (freeSpaceInSlot >= leftoverQuantity)
+                {
+                    heldItem.itemQuantity += leftoverQuantity;
+                    allInventorySlots[i].UpdateData();
+                    return;
+                }
+                else
+                {
+                    heldItem.itemQuantity = heldItem.maxItemQuantity;
+                    leftoverQuantity -= freeSpaceInSlot;
+                }
+            }
+            else if (heldItem == null)
+            {
+                if (!openSlot)
+                    openSlot = allInventorySlots[i];
+            }
+
+            allInventorySlots[i].UpdateData();
+        }
+
+        if (leftoverQuantity > 0 && openSlot)
+        {
+            openSlot.SetItem(_itemToAdd);
+            _itemToAdd.itemQuantity = leftoverQuantity;
         }
         else
         {
-            slotFound = listSlots.FirstOrDefault(s => s.currentItem == null);
-            if (slotFound == null)
-            {
-                return false;
-                // inventory full
-            }
-            slotFound.ChangeItem(_item);
+            _itemToAdd.itemQuantity = leftoverQuantity;
         }
-        return true;
+    }
+    public void AddItemToHotbar(ItemSO _itemToAdd)
+    {
+        var firstSlot = hotbarInventorySlots[0];
+
+        if (firstSlot.HasItem())
+        {
+            Instantiate(firstSlot.GetItem().prefab, FindObjectOfType<CameraController>().GetDropPoint().position, Quaternion.identity);
+            firstSlot.SetItem(null);
+        }
+
+        firstSlot.SetItem(_itemToAdd);
+    }
+    private void DropItem()
+    {
+
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            Slot currentSlot = allInventorySlots[i];
+            if (currentSlot.hovered && currentSlot.HasItem())
+            {
+                Instantiate(currentSlot.GetItem().prefab, FindObjectOfType<CameraController>().GetDropPoint().position, Quaternion.identity);
+                currentSlot.SetItem(null);
+                break;
+            }
+        }
+
+    }
+    private void GetSlots()
+    {
+        inventorySlots = inventorySlotsParent.GetComponentsInChildren<Slot>().ToList();
+        hotbarInventorySlots = hotbarSlotsParent.GetComponentsInChildren<Slot>().ToList();
+        hotbarBackgroundSlots = hotbarSlotsBackgroundParent.GetComponentsInChildren<Image>().ToList();
+
+        allInventorySlots = inventorySlots.Concat(hotbarInventorySlots).ToList();
+
+        hotbarInventorySlots.ForEach(slot => slot.OnItemChanged += HandleItemChangeInHotbar);
+
+        allInventorySlots.ForEach(slot => slot.InitialiseSlot());
+    }
+    private void DragInventoryIcon()
+    {
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            Slot currentSlot = allInventorySlots[i];
+            if(currentSlot.hovered && currentSlot.HasItem())
+            {
+                currentDragSlotIndex = i;
+
+                currentDraggedItem = currentSlot.GetItem();
+                dragIconImage.sprite = currentDraggedItem.itemIcon;
+                dragIconImage.color = new Color(1, 1, 1, 1);
+
+                currentSlot.SetItem(null);
+            }
+        }
+    }
+    private void DropInventoryIcon()
+    {
+        dragIconImage.sprite = null;
+        dragIconImage.color = new Color(1, 1, 1, 0);
+
+        bool itemPlaced = false;
+
+        for (int i = 0; i < allInventorySlots.Count; i++)
+        {
+            Slot currentSlot = allInventorySlots[i];
+            if (currentSlot.hovered)
+            {
+                if (currentSlot.CanAcceptItem(currentDraggedItem))
+                {
+                    if (currentSlot.HasItem())
+                    {
+                        ItemSO itemToSwap = currentSlot.GetItem();
+                        currentSlot.SetItem(currentDraggedItem);
+
+                        allInventorySlots[currentDragSlotIndex].SetItem(itemToSwap);
+                    }
+                    else
+                    {
+                        currentSlot.SetItem(currentDraggedItem);
+                    }
+                    itemPlaced = true;
+                    break;
+                }
+            }
+        }
+
+        if (!itemPlaced)
+        {
+            allInventorySlots[currentDragSlotIndex].SetItem(currentDraggedItem);
+        }
+
+        ResetDragVariables();
+    }
+    private void ResetDragVariables()
+    {
+        currentDraggedItem = null;
+        currentDragSlotIndex = 1;
     }
 
-    private List<Slot> GetSlots(Transform _grid)
+    private int activeHotbarIndex = 0;
+
+    private void HotBarSelected(int _keyNum)
     {
-        if (_grid == null || _grid.childCount <= 0)
-            return null;
-
-        List<Slot> slots = new List<Slot>();
-
-        for (int i = 0; i < _grid.childCount; i++)
+        int newActiveIndex = _keyNum - 1;
+        if (newActiveIndex == activeHotbarIndex)
         {
-            slots.Add(_grid.GetChild(i).GetComponent<Slot>());
+            return;
         }
-        return slots;
+
+        activeHotbarIndex = newActiveIndex;
+
+        for (int i = 0; i < hotbarInventorySlots.Count; i++)
+        {
+            hotbarBackgroundSlots[i].color = new Color32(255, 255, 255, 128);
+        }
+        hotbarBackgroundSlots[activeHotbarIndex].color = new Color32(255, 255, 255, 210);
+
+        ItemSO selectedItem = hotbarInventorySlots[activeHotbarIndex].GetItem();
+        HandItemSO handItem = selectedItem as HandItemSO;
+
+        OnHoldItem?.Invoke(handItem);
+    }
+    private void HandleItemChangeInHotbar(ItemSO _newItem)
+    {
+        ItemSO currentItem = hotbarInventorySlots[activeHotbarIndex].GetItem();
+        HandItemSO handItem = currentItem as HandItemSO;
+
+        if (currentItem == _newItem)
+        {
+            OnHoldItem?.Invoke(handItem);
+        }
+        else
+        {
+            return;
+        }
     }
 }

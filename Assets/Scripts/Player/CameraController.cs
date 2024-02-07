@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform cameraHolder = null;
     [SerializeField] private Transform dropPoint = null;
+    [SerializeField] private Transform handTransform = null;
     [SerializeField] private Transform camera = null;
     [Space]
     [SerializeField] private float smoothTime = 0.1f;
@@ -68,6 +69,10 @@ public class CameraController : MonoBehaviour
     public Transform GetDropPoint()
     {
         return dropPoint;
+    }
+    public Transform GetHandTransform()
+    {
+        return handTransform;
     }
 
     private void CanRotateCamera(bool _canRotate)

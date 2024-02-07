@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
     public CharacterController characterController;
+    [HideInInspector] 
+    public float currentSpeed;
 
     [SerializeField] private float walkAccelerationTime = 0.5f;
     [SerializeField] private float runAccelerationTime = 0.3f;
@@ -13,27 +16,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpStrength = 10f;
     [SerializeField] private float walkSpeed = 4f;
     [SerializeField] private float runSpeed = 8f;
-    public float currentSpeed;
-
+   
     private Vector3 currentMoveVelocity;
     private Vector3 currentForceVelocity;
     private Vector2 movementInput;
     private bool jumpPressed; 
     private float targetSpeed;
     private bool canPlayerMove = true;
-
     private CameraController cameraController;
 
-    private void Start()
+    public HandItemSO currentHandItemSO;
+    public GrabbableItem currentGrabbableItem;
+    public GameObject currentItemGO;
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         cameraController = GetComponentInChildren<CameraController>();
-
+    }
+    private void Start()
+    {
         InputManager.Instance.OnMove += HandleMoveInput;
         InputManager.Instance.OnJump += HandleJumpInput;
         InputManager.Instance.StopPlayer += CanPlayerMove;
-    }
 
+        Inventory inventory = FindObjectOfType<Inventory>();
+        if (inventory != null)
+        {
+            inventory.OnHoldItem += SetCurrentHoldItem;
+        }
+    }
     private void OnDestroy()
     {
         if (InputManager.Instance != null)
@@ -41,6 +52,13 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.OnMove -= HandleMoveInput;
             InputManager.Instance.OnJump -= HandleJumpInput;
             InputManager.Instance.StopPlayer -= CanPlayerMove;
+            InputManager.Instance.OnItemUse -= currentGrabbableItem.Use;
+
+            Inventory inventory = FindObjectOfType<Inventory>();
+            if (inventory != null)
+            {
+                inventory.OnHoldItem -= SetCurrentHoldItem;
+            }
         }
     }
 
@@ -52,20 +70,34 @@ public class PlayerController : MonoBehaviour
             HandleGravityAndJump();
         }
     }
-    public void DropObject(Item _item)
-    {
-        if (_item == null || _item.itemQuantity <= 0 || _item.prefab == null)
-        {
-            Debug.Log("_item == null || _item.itemQuantity <= 0 || _item.prefab == null");
-            return;
-        }
 
-        GameObject dropObject = Instantiate(_item.prefab, cameraController.GetDropPoint().position, cameraController.GetDropPoint().rotation);
-        Debug.Log("should drop");
-        if(dropObject.GetComponent<Rigidbody>())
-            return;
-        else
-            dropObject.AddComponent<Rigidbody>();
+    private void SetCurrentHoldItem(HandItemSO item)
+    {
+        if(currentGrabbableItem != null)
+            InputManager.Instance.OnItemUse -= currentGrabbableItem.Use;
+
+        if(currentItemGO != null)
+        {
+            currentHandItemSO = null;   
+            currentGrabbableItem = null;
+            Destroy(currentItemGO);         
+        }
+        currentHandItemSO = item;
+       
+        GetComponent<PlayerAnimatorController>().PlayTriggerAnimation("AxeEquip");
+    }
+
+    private void SpawnItem()
+    {
+        Destroy(currentItemGO);
+        if (currentHandItemSO != null)
+        {
+            currentItemGO = Instantiate(currentHandItemSO.prefab, cameraController.GetHandTransform().position, Quaternion.identity);
+            currentItemGO.transform.parent = cameraController.GetHandTransform();
+            currentGrabbableItem = currentItemGO.GetComponent<GrabbableItem>();
+            InputManager.Instance.OnItemUse += currentGrabbableItem.Use;
+            currentItemGO.transform.localRotation = Quaternion.Euler(currentHandItemSO.startRotation);
+        }
     }
 
     private void CanPlayerMove(bool _canMove)

@@ -73,6 +73,15 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""6cec88da-ec2f-46be-8310-b0d721953b6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""3eca1e36-2373-4996-a18b-74515f47ae5e"",
@@ -94,6 +103,24 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""name"": ""Hold"",
                     ""type"": ""Button"",
                     ""id"": ""42195d9d-d9d2-4e02-85aa-a2a8746541f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f3c02aa-72e7-4540-ad07-5aabc58e084c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryDropItem "",
+                    ""type"": ""Button"",
+                    ""id"": ""9040777b-5c16-4ca6-8aaf-785d8265f1cc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -232,6 +259,187 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4f12ad2-6b2b-43a2-a383-1b56c30f36a9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryDropItem "",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb80bf30-0fec-4f9b-8c5e-5e7d2e66f8d3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c8dee3e-b502-4e23-8731-6a9f7a0cb352"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""0eb82e2e-71bb-4ec9-8454-1942298ae6cf"",
+            ""actions"": [
+                {
+                    ""name"": ""Key1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d774f3c7-6b26-4146-88f0-6dbdc575a3c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbcd6a9a-3461-426a-a285-3297ef7fdd2d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key3"",
+                    ""type"": ""Button"",
+                    ""id"": ""66461d0e-223e-4c49-b520-50e126cf85f7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key4"",
+                    ""type"": ""Button"",
+                    ""id"": ""e88dc0c5-6793-4f1a-ac4b-018c7e4c7467"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key5"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf7bc8f0-4796-4b92-85e8-4ce6a7bbdc88"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key6"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5632abe-4c03-499c-97dc-0e15399a93cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Key7"",
+                    ""type"": ""Button"",
+                    ""id"": ""08ec2d22-0ae4-4309-b444-81622b986e7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f8c87bb2-2afa-4c00-b13a-a489b02c6f70"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caa058f9-6a63-45d2-b933-baa651e97bb0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7709d38-4cad-43e2-a75f-448e53e885b1"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eadb6684-6a8f-4192-a83c-8e3b557d482e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98ee3f6d-67a1-467f-a721-10abe91ac2e5"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d640f518-a2b6-43d4-b0f6-bffb4154a57a"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2628812-eaa0-43c6-927f-9c0777fed21b"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Key7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -245,9 +453,21 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
         m_Player_Hold = m_Player.FindAction("Hold", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
+        m_Player_InventoryDropItem = m_Player.FindAction("InventoryDropItem ", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Key1 = m_UI.FindAction("Key1", throwIfNotFound: true);
+        m_UI_Key2 = m_UI.FindAction("Key2", throwIfNotFound: true);
+        m_UI_Key3 = m_UI.FindAction("Key3", throwIfNotFound: true);
+        m_UI_Key4 = m_UI.FindAction("Key4", throwIfNotFound: true);
+        m_UI_Key5 = m_UI.FindAction("Key5", throwIfNotFound: true);
+        m_UI_Key6 = m_UI.FindAction("Key6", throwIfNotFound: true);
+        m_UI_Key7 = m_UI.FindAction("Key7", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -312,9 +532,12 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Escape;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pickup;
     private readonly InputAction m_Player_Hold;
+    private readonly InputAction m_Player_UseItem;
+    private readonly InputAction m_Player_InventoryDropItem;
     public struct PlayerActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -324,9 +547,12 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
         public InputAction @Hold => m_Wrapper.m_Player_Hold;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
+        public InputAction @InventoryDropItem => m_Wrapper.m_Player_InventoryDropItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,6 +577,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
@@ -360,6 +589,12 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Hold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
                 @Hold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
                 @Hold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
+                @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                @InventoryDropItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
+                @InventoryDropItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
+                @InventoryDropItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -379,6 +614,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -388,10 +626,97 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Hold.started += instance.OnHold;
                 @Hold.performed += instance.OnHold;
                 @Hold.canceled += instance.OnHold;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
+                @InventoryDropItem.started += instance.OnInventoryDropItem;
+                @InventoryDropItem.performed += instance.OnInventoryDropItem;
+                @InventoryDropItem.canceled += instance.OnInventoryDropItem;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Key1;
+    private readonly InputAction m_UI_Key2;
+    private readonly InputAction m_UI_Key3;
+    private readonly InputAction m_UI_Key4;
+    private readonly InputAction m_UI_Key5;
+    private readonly InputAction m_UI_Key6;
+    private readonly InputAction m_UI_Key7;
+    public struct UIActions
+    {
+        private @PlayerInputSystem m_Wrapper;
+        public UIActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Key1 => m_Wrapper.m_UI_Key1;
+        public InputAction @Key2 => m_Wrapper.m_UI_Key2;
+        public InputAction @Key3 => m_Wrapper.m_UI_Key3;
+        public InputAction @Key4 => m_Wrapper.m_UI_Key4;
+        public InputAction @Key5 => m_Wrapper.m_UI_Key5;
+        public InputAction @Key6 => m_Wrapper.m_UI_Key6;
+        public InputAction @Key7 => m_Wrapper.m_UI_Key7;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Key1.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey1;
+                @Key1.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey1;
+                @Key1.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey1;
+                @Key2.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey2;
+                @Key2.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey2;
+                @Key2.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey2;
+                @Key3.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey3;
+                @Key3.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey3;
+                @Key3.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey3;
+                @Key4.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey4;
+                @Key4.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey4;
+                @Key4.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey4;
+                @Key5.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey5;
+                @Key5.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey5;
+                @Key5.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey5;
+                @Key6.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey6;
+                @Key6.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey6;
+                @Key6.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey6;
+                @Key7.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
+                @Key7.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
+                @Key7.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Key1.started += instance.OnKey1;
+                @Key1.performed += instance.OnKey1;
+                @Key1.canceled += instance.OnKey1;
+                @Key2.started += instance.OnKey2;
+                @Key2.performed += instance.OnKey2;
+                @Key2.canceled += instance.OnKey2;
+                @Key3.started += instance.OnKey3;
+                @Key3.performed += instance.OnKey3;
+                @Key3.canceled += instance.OnKey3;
+                @Key4.started += instance.OnKey4;
+                @Key4.performed += instance.OnKey4;
+                @Key4.canceled += instance.OnKey4;
+                @Key5.started += instance.OnKey5;
+                @Key5.performed += instance.OnKey5;
+                @Key5.canceled += instance.OnKey5;
+                @Key6.started += instance.OnKey6;
+                @Key6.performed += instance.OnKey6;
+                @Key6.canceled += instance.OnKey6;
+                @Key7.started += instance.OnKey7;
+                @Key7.performed += instance.OnKey7;
+                @Key7.canceled += instance.OnKey7;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -399,8 +724,21 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnHold(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
+        void OnInventoryDropItem(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnKey1(InputAction.CallbackContext context);
+        void OnKey2(InputAction.CallbackContext context);
+        void OnKey3(InputAction.CallbackContext context);
+        void OnKey4(InputAction.CallbackContext context);
+        void OnKey5(InputAction.CallbackContext context);
+        void OnKey6(InputAction.CallbackContext context);
+        void OnKey7(InputAction.CallbackContext context);
     }
 }

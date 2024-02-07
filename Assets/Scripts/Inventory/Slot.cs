@@ -5,93 +5,90 @@ using TMPro;
 
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image enterImage = null;
-    [SerializeField] private Image selectImage = null;
+    public bool hovered;
+    private ItemSO heldItem;
 
-    public Item currentItem = null;
-    private Image icon;
-    private TextMeshProUGUI itemQuantityTxt;
+    private Color opaque = new Color(1, 1, 1, 1);
+    private Color transparent = new Color(1, 1, 1, 0);
 
-    private void Awake()
+    private Image thisSlotImage;
+    private TMP_Text thisSlotQuantityText;
+
+    public delegate void ItemChanged(ItemSO newItem);
+    public event ItemChanged OnItemChanged;
+
+    [SerializeField] public bool isHotbarSlot;
+
+    public void InitialiseSlot()
     {
-        icon = transform.Find("Icon").GetComponent<Image>();
-        itemQuantityTxt = transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
-        enterImage.enabled = false;
-        selectImage.enabled = false;
+        thisSlotImage = gameObject.GetComponent<Image>();
+        thisSlotQuantityText = transform.GetChild(0).GetComponent<TMP_Text>();
+        thisSlotImage.sprite = null;
+        thisSlotImage.color = transparent;
+        SetItem(null);
+    }    
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+        hovered = true;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerExit(PointerEventData pointerEventData)
     {
-        enterImage.enabled = true;
+        hovered = false;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void SetItem(ItemSO _item)
     {
-        enterImage.enabled = false;
-    }
-    public void MouseSelect(BaseEventData data)
-    {
-        PointerEventData pointer = (PointerEventData)data;
-        if (pointer.button == PointerEventData.InputButton.Right)
+        if (_item != null && !CanAcceptItem(_item))
         {
-            Inventory.instance.panelOptions.ShowOptions(this);
-        }
-    }
-    public void ChangeItem(Item _item)
-    {
-        currentItem = _item;
-        Refresh();
-    }
-
-    public void Refresh()
-    {
-        RefreshIcon();
-        RefreshQuantity();
-    }
-    public void SetSelectImage(bool active)
-    {
-        selectImage.enabled = active;
-    }
-    public void DeleteItem()
-    {
-        if (currentItem == null || currentItem.itemQuantity <= 0)
-            return;
-
-        currentItem.itemQuantity--;
-        if(currentItem.itemQuantity <= 0)
-        {
-            ChangeItem(null);
             return;
         }
-        Refresh();
-    }
+        heldItem = _item;
 
-    private void RefreshIcon()
-    {
-        if (currentItem == null)
+        if (_item != null)
         {
-            icon.sprite = null;
-            icon.color = new Color(255, 255, 255, 0);
-            return;
+            thisSlotImage.sprite = heldItem.itemIcon;
+            thisSlotImage.color = opaque;
+            UpdateData();
         }
-        icon.sprite = currentItem.itemIcon;
-        icon.type = Image.Type.Simple;
-        icon.preserveAspect = true;
-        icon.color = Color.white;
-    }
-
-    private void RefreshQuantity()
-    {
-        if (currentItem == null)
+        else
         {
-            itemQuantityTxt.text = string.Empty;
-            return;
+            thisSlotImage.sprite = null;
+            thisSlotImage.color = transparent;
+            UpdateData();
         }
-        itemQuantityTxt.text = (currentItem.itemQuantity > 1) ? currentItem.itemQuantity.ToString() : string.Empty;
+
+        if (isHotbarSlot)
+        {
+            OnItemChanged?.Invoke(_item);
+        }
     }
 
-    
+    public ItemSO GetItem()
+    {
+        return heldItem;
+    }
 
-    
+    public void UpdateData()
+    {
+        if (heldItem != null)
+            thisSlotQuantityText.text = heldItem.itemQuantity.ToString();
+        else
+            thisSlotQuantityText.text = "";
+    }
+
+    public bool HasItem()
+    {
+        return heldItem ? true : false;
+    }
+    public bool CanAcceptItem(ItemSO _item)
+    {
+        if (isHotbarSlot)
+        {
+            return _item.ItemType == ItemType.Weapon || _item.ItemType == ItemType.Tool || _item.ItemType == ItemType.Consumable;
+        }
+        return true;
+    }
+
+
 }
-

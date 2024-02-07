@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Item", menuName = "ScriptableObject/Item")]
-public class Item : ScriptableObject
+public class ItemSO : ScriptableObject
 {
     [SerializeField] private string ItemName = string.Empty;
     public string itemName => ItemName;
@@ -25,4 +24,6 @@ public class Item : ScriptableObject
     [SerializeField] private GameObject Prefab;
     public GameObject prefab => Prefab;
 
+    [SerializeField] private ItemType itemType = ItemType.Default;
+    public ItemType ItemType => itemType;
 }

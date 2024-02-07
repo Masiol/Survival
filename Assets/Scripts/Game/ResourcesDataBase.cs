@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ResourcesDataBase : MonoBehaviour
 {
-    private Item[] itemsDataBase = null;
+    ItemSO[] itemsDataBase = null;
 
     public void Init()
     {
-        itemsDataBase = Resources.LoadAll<Item>("Scriptables/Items");
+        itemsDataBase = Resources.LoadAll<ItemSO>("Scriptables/Items");
     }
 
-    public Item GetItemByName(string _itemName)
+    public ItemSO GetItemByName(string _itemName)
     {
         if (itemsDataBase.Length <= 0)
         {
