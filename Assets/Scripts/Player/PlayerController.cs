@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     private CameraController cameraController;
 
     public HandItemSO currentHandItemSO;
-    public GrabbableItem currentGrabbableItem;
     public GameObject currentItemGO;
     private void Awake()
     {
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.OnMove -= HandleMoveInput;
             InputManager.Instance.OnJump -= HandleJumpInput;
             InputManager.Instance.StopPlayer -= CanPlayerMove;
-            InputManager.Instance.OnItemUse -= currentGrabbableItem.Use;
 
             Inventory inventory = FindObjectOfType<Inventory>();
             if (inventory != null)
@@ -71,32 +69,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetCurrentHoldItem(HandItemSO item)
+    private void SetCurrentHoldItem(HandItemSO _item)
     {
-        if(currentGrabbableItem != null)
-            InputManager.Instance.OnItemUse -= currentGrabbableItem.Use;
+        currentHandItemSO = _item;
+        GetComponent<PlayerAnimatorController>().Equip();
 
-        if(currentItemGO != null)
+        if (currentItemGO != null)
         {
-            currentHandItemSO = null;   
-            currentGrabbableItem = null;
-            Destroy(currentItemGO);         
+            InputManager.Instance.OnItemUse -= currentItemGO.GetComponent<GrabbableItem>().Use;
+            InputManager.Instance.OnSpecialUseItem -= currentItemGO.GetComponent<GrabbableItem>().SpecialUse;
         }
-        currentHandItemSO = item;
-       
-        GetComponent<PlayerAnimatorController>().PlayTriggerAnimation("AxeEquip");
     }
 
     private void SpawnItem()
     {
         Destroy(currentItemGO);
+
         if (currentHandItemSO != null)
         {
             currentItemGO = Instantiate(currentHandItemSO.prefab, cameraController.GetHandTransform().position, Quaternion.identity);
-            currentItemGO.transform.parent = cameraController.GetHandTransform();
-            currentGrabbableItem = currentItemGO.GetComponent<GrabbableItem>();
-            InputManager.Instance.OnItemUse += currentGrabbableItem.Use;
+            currentItemGO.transform.parent = cameraController.GetHandTransform();      
             currentItemGO.transform.localRotation = Quaternion.Euler(currentHandItemSO.startRotation);
+            currentItemGO.GetComponent<Rigidbody>().isKinematic = true;
+
+            InputManager.Instance.OnItemUse += currentItemGO.GetComponent<GrabbableItem>().Use;
+            InputManager.Instance.OnSpecialUseItem += currentItemGO.GetComponent<GrabbableItem>().SpecialUse;
         }
     }
 

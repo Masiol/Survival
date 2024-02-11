@@ -14,6 +14,8 @@ public enum ItemType
 }
 public class Inventory : MonoBehaviour
 {
+    public event System.Action<HandItemSO> OnHoldItem;
+
     public GameObject inventorySlotsParent;
     public GameObject hotbarSlotsParent;
     public GameObject hotbarSlotsBackgroundParent;
@@ -24,9 +26,11 @@ public class Inventory : MonoBehaviour
     private List<Image> hotbarBackgroundSlots = new List<Image>();
     private List<Slot> allInventorySlots = new List<Slot>();
     private ItemSO currentDraggedItem;
-    private int currentDragSlotIndex = -1;
 
-    public event System.Action<HandItemSO> OnHoldItem;
+    private int currentDragSlotIndex = -1;
+    private int lastHotBarSelectedSlot = 0;
+
+    
 
     private void Start()
     {
@@ -47,6 +51,7 @@ public class Inventory : MonoBehaviour
     {
         InputManager.Instance.OnInventoryDropItem += DropItem;
         InputManager.Instance.OnInteractHotBar += HotBarSelected;
+
     }
     private void UnsubscribeEvents()
     {
@@ -119,27 +124,44 @@ public class Inventory : MonoBehaviour
 
         if (firstSlot.HasItem())
         {
-            Instantiate(firstSlot.GetItem().prefab, FindObjectOfType<CameraController>().GetDropPoint().position, Quaternion.identity);
-            firstSlot.SetItem(null);
+            DropItemGeneral(firstSlot);
         }
 
         firstSlot.SetItem(_itemToAdd);
     }
     private void DropItem()
     {
-
         for (int i = 0; i < allInventorySlots.Count; i++)
         {
             Slot currentSlot = allInventorySlots[i];
             if (currentSlot.hovered && currentSlot.HasItem())
             {
-                Instantiate(currentSlot.GetItem().prefab, FindObjectOfType<CameraController>().GetDropPoint().position, Quaternion.identity);
-                currentSlot.SetItem(null);
+                DropItemGeneral(currentSlot);
                 break;
             }
         }
-
     }
+    private void DropItemGeneral(Slot _slot)
+    {
+        var item = _slot.GetItem();
+        if (item != null)
+        {
+            for (int i = 0; i < item.itemQuantity; i++)
+            {
+                // Tworzymy obiekt na scenie dla ka¿dego upuszczanego przedmiotu.
+                var go = Instantiate(item.prefab, FindObjectOfType<CameraController>().GetDropPoint().position, Quaternion.identity);
+                go.GetComponent<Rigidbody>().isKinematic = false;
+                go.GetComponent<Rigidbody>().AddForce(Vector3.forward * 5, ForceMode.Impulse); // Dostosuj si³ê, z jak¹ przedmiot jest rzucony.
+            }
+        }
+        _slot.SetItem(null);
+    }
+    public void RemoveItemFromInventory()
+    {
+        Slot currentHotBarSlot = hotbarInventorySlots[lastHotBarSelectedSlot];
+        currentHotBarSlot.SetItem(null);
+    }
+
     private void GetSlots()
     {
         inventorySlots = inventorySlotsParent.GetComponentsInChildren<Slot>().ToList();
@@ -224,6 +246,7 @@ public class Inventory : MonoBehaviour
         }
 
         activeHotbarIndex = newActiveIndex;
+        lastHotBarSelectedSlot = activeHotbarIndex;
 
         for (int i = 0; i < hotbarInventorySlots.Count; i++)
         {

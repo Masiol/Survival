@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Rock
   ItemDesc: Small Rock
-  ItemIcon: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+  ItemIcon: {fileID: 21300000, guid: 7bfb12cccf845d540a4926ae770c319f, type: 3}
   itemQuantity: 1
   MaxItemQuantity: 4
   Stackable: 1
-  StackOnGround: 0
   Prefab: {fileID: 4766334358628734749, guid: 1831f1fd71a41b4469260197b30837af, type: 3}
   itemType: 4

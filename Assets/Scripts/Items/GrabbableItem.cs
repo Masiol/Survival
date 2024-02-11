@@ -4,15 +4,15 @@ using UnityEngine;
 
 public abstract class GrabbableItem : PickupableItem, IGrabbable
 {
-    public PlayerAnimatorController playerAnimatorController;
     public string[] animTriggerName;
-    private void Awake()
+    protected PlayerAnimatorController playerAnimatorController;
+
+    public virtual void Awake()
     {
         playerAnimatorController = FindObjectOfType<PlayerAnimatorController>();
     }
     public virtual void Grab()
-    {
-        Inventory inventory = FindObjectOfType<Inventory>();
+    { 
         if (inventory != null)
         {
             inventory.AddItemToHotbar(itemData);
@@ -26,11 +26,12 @@ public abstract class GrabbableItem : PickupableItem, IGrabbable
 
     public virtual void Use()
     {
-        playerAnimatorController.PlayTriggerAnimation(animTriggerName[1]);
+        playerAnimatorController.PlayTriggerAnimation(animTriggerName[0]);
     }
 
-    public virtual void SpecialUse()
+    public virtual void SpecialUse(bool _isPressed)
     {
+
         Debug.Log($"Special using {itemData.itemName}.");
     }
 }

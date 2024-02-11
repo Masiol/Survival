@@ -96,13 +96,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "InventoryDropItem ",
-                    "type": "Button",
-                    "id": "9040777b-5c16-4ca6-8aaf-785d8265f1cc",
+                    "name": "SpecialUseItem",
+                    "type": "Value",
+                    "id": "3a168c53-51ac-47d6-879d-697d10cc45fe",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -240,17 +240,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b4f12ad2-6b2b-43a2-a383-1b56c30f36a9",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InventoryDropItem ",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "fb80bf30-0fec-4f9b-8c5e-5e7d2e66f8d3",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -268,6 +257,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77b699aa-6182-4c6e-a6c7-c748fa8f6534",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialUseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -335,6 +335,15 @@
                     "name": "Key7",
                     "type": "Button",
                     "id": "08ec2d22-0ae4-4309-b444-81622b986e7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryDropItem ",
+                    "type": "Button",
+                    "id": "78c45ca4-3590-4dbb-bdc1-65fac0c72ffe",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -416,6 +425,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Key7",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d397ace-90e9-4a42-bce5-2720b7f054e7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryDropItem ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

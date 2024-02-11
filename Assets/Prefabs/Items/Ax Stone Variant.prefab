@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1587078201, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1713214988236272, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_Name
-      value: Ax Stone Variant
+      value: Ax Stone Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1713214988236272, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_Layer
@@ -25,35 +25,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.276
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.618
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.737
+      value: 3.97
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000003348487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7660445
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000028097139
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.64278764
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4887946386961148, guid: 0169672840b1dde468fe8324a76ce492, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -84,7 +84,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Stone Axe
-  playerAnimatorController: {fileID: 0}
   animTriggerName:
-  - AxeEquip
   - AxeAttack
+  - SpecialUseAxe

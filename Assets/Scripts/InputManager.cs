@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
     public event System.Action<int> OnInteractHotBar;
 
     public event System.Action OnItemUse;
+    public event System.Action<bool> OnSpecialUseItem;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get; private set; }
     public float StrafeDirection { get; private set; }
@@ -73,11 +74,12 @@ public class InputManager : MonoBehaviour
         inputSystem.Player.Escape.performed += ctx => Cancel?.Invoke();
 
         inputSystem.Player.UseItem.performed += ctx => OnItemUse?.Invoke();
+        inputSystem.Player.SpecialUseItem.performed += ctx => OnSpecialUseItem?.Invoke(true);
+        inputSystem.Player.SpecialUseItem.canceled += ctx => OnSpecialUseItem?.Invoke(false);
 
-        //zmienic na UI
-        inputSystem.Player.InventoryDropItem.performed += ctx => OnInventoryDropItem?.Invoke();
         inputSystem.Player.Inventory.performed += ctx => OnInventory?.Invoke();
-        //zmienic na UI
+        inputSystem.UI.InventoryDropItem.performed += ctx => OnInventoryDropItem?.Invoke();
+        
         inputSystem.UI.Key1.performed += ctx => OnInteractHotBar.Invoke(1);
         inputSystem.UI.Key2.performed += ctx => OnInteractHotBar.Invoke(2);
         inputSystem.UI.Key3.performed += ctx => OnInteractHotBar.Invoke(3);

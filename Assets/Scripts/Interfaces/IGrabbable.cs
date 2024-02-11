@@ -6,5 +6,5 @@ public interface IGrabbable
 {
     void Grab();
     void Use();
-    void SpecialUse();
+    void SpecialUse(bool _isPressed);
 }

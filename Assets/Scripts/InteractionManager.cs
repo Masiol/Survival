@@ -12,6 +12,7 @@ public class InteractionManager : MonoBehaviour
     private IPickupable currentPickupable;
     private IGrabbable currentGrabbable;
     private IOutlineable currentOutlineable;
+    private IDetectable currentDetectable;
     private bool checkInteraction = true;
 
     [SerializeField] private string[] texts;
@@ -55,6 +56,7 @@ public class InteractionManager : MonoBehaviour
             // Check if the hit object is interactable, pickupable, or holdable
             if (hit.collider.gameObject.GetComponent<IInteractable>() != null ||
                 hit.collider.gameObject.GetComponent<IPickupable>() != null ||
+                hit.collider.gameObject.GetComponent<IDetectable>() != null ||
                 hit.collider.gameObject.GetComponent<IGrabbable>() != null)
             {
                 UpdateInteractableObject(hit.collider.gameObject);
@@ -75,6 +77,7 @@ public class InteractionManager : MonoBehaviour
         var pickupable = _obj.GetComponent<IPickupable>();
         var grabbable = _obj.GetComponent<IGrabbable>();
         var outlineable = _obj.GetComponent<IOutlineable>();
+        var detectable = _obj.GetComponent<IDetectable>();
 
         // Reset current interactable if there's a change
         if (currentInteractable != interactable || currentPickupable != pickupable || currentGrabbable != grabbable)
@@ -99,7 +102,14 @@ public class InteractionManager : MonoBehaviour
             SetCurrentInteractable(pickupable, ref currentPickupable, outlineable);
             TextOnScreen.text = texts[1];
         }
-        
+        else if (detectable != null)
+        {
+            SetCurrentInteractable(detectable, ref currentDetectable, outlineable);
+            TextOnScreen.text = "";
+            detectable.DetectRaycast(true);
+            GetComponentInParent<DetectableObserver>().AddDetectable(detectable);
+        }
+
     }
     private void SetCurrentInteractable<T>(T _newInteractable, ref T currentInteractable, IOutlineable _outlineable)
     {
@@ -148,7 +158,7 @@ public class InteractionManager : MonoBehaviour
     }
     private void ClearCurrentInteractable()
     {
-        if (currentInteractable != null || currentPickupable != null || currentGrabbable != null || currentOutlineable != null)
+        if (currentInteractable != null || currentPickupable != null || currentGrabbable != null || currentOutlineable != null || currentDetectable != null)
         {
           //  Debug.Log("Clearing current interactable objects.");
             UpdateOutline(currentOutlineable, false);
@@ -156,6 +166,12 @@ public class InteractionManager : MonoBehaviour
             currentGrabbable = null;
             currentPickupable = null;
             currentOutlineable = null;
+            if (currentDetectable != null)
+            {
+                currentDetectable.DetectRaycast(false);
+                GetComponentInParent<DetectableObserver>().RemoveDetectable(currentDetectable);
+                currentDetectable = null;
+            }
             TextOnScreen.text = "";
         }
     }

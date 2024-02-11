@@ -118,13 +118,13 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""InventoryDropItem "",
-                    ""type"": ""Button"",
-                    ""id"": ""9040777b-5c16-4ca6-8aaf-785d8265f1cc"",
+                    ""name"": ""SpecialUseItem"",
+                    ""type"": ""Value"",
+                    ""id"": ""3a168c53-51ac-47d6-879d-697d10cc45fe"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -262,17 +262,6 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b4f12ad2-6b2b-43a2-a383-1b56c30f36a9"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""InventoryDropItem "",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fb80bf30-0fec-4f9b-8c5e-5e7d2e66f8d3"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -290,6 +279,17 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77b699aa-6182-4c6e-a6c7-c748fa8f6534"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialUseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -357,6 +357,15 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""name"": ""Key7"",
                     ""type"": ""Button"",
                     ""id"": ""08ec2d22-0ae4-4309-b444-81622b986e7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryDropItem "",
+                    ""type"": ""Button"",
+                    ""id"": ""78c45ca4-3590-4dbb-bdc1-65fac0c72ffe"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -440,6 +449,17 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""Key7"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d397ace-90e9-4a42-bce5-2720b7f054e7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryDropItem "",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -458,7 +478,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
         m_Player_Hold = m_Player.FindAction("Hold", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
-        m_Player_InventoryDropItem = m_Player.FindAction("InventoryDropItem ", throwIfNotFound: true);
+        m_Player_SpecialUseItem = m_Player.FindAction("SpecialUseItem", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Key1 = m_UI.FindAction("Key1", throwIfNotFound: true);
@@ -468,6 +488,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         m_UI_Key5 = m_UI.FindAction("Key5", throwIfNotFound: true);
         m_UI_Key6 = m_UI.FindAction("Key6", throwIfNotFound: true);
         m_UI_Key7 = m_UI.FindAction("Key7", throwIfNotFound: true);
+        m_UI_InventoryDropItem = m_UI.FindAction("InventoryDropItem ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -537,7 +558,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pickup;
     private readonly InputAction m_Player_Hold;
     private readonly InputAction m_Player_UseItem;
-    private readonly InputAction m_Player_InventoryDropItem;
+    private readonly InputAction m_Player_SpecialUseItem;
     public struct PlayerActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -552,7 +573,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
         public InputAction @Hold => m_Wrapper.m_Player_Hold;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
-        public InputAction @InventoryDropItem => m_Wrapper.m_Player_InventoryDropItem;
+        public InputAction @SpecialUseItem => m_Wrapper.m_Player_SpecialUseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -592,9 +613,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
-                @InventoryDropItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
-                @InventoryDropItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
-                @InventoryDropItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryDropItem;
+                @SpecialUseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialUseItem;
+                @SpecialUseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialUseItem;
+                @SpecialUseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecialUseItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -629,9 +650,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
-                @InventoryDropItem.started += instance.OnInventoryDropItem;
-                @InventoryDropItem.performed += instance.OnInventoryDropItem;
-                @InventoryDropItem.canceled += instance.OnInventoryDropItem;
+                @SpecialUseItem.started += instance.OnSpecialUseItem;
+                @SpecialUseItem.performed += instance.OnSpecialUseItem;
+                @SpecialUseItem.canceled += instance.OnSpecialUseItem;
             }
         }
     }
@@ -647,6 +668,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Key5;
     private readonly InputAction m_UI_Key6;
     private readonly InputAction m_UI_Key7;
+    private readonly InputAction m_UI_InventoryDropItem;
     public struct UIActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -658,6 +680,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         public InputAction @Key5 => m_Wrapper.m_UI_Key5;
         public InputAction @Key6 => m_Wrapper.m_UI_Key6;
         public InputAction @Key7 => m_Wrapper.m_UI_Key7;
+        public InputAction @InventoryDropItem => m_Wrapper.m_UI_InventoryDropItem;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -688,6 +711,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Key7.started -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
                 @Key7.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
                 @Key7.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnKey7;
+                @InventoryDropItem.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventoryDropItem;
+                @InventoryDropItem.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventoryDropItem;
+                @InventoryDropItem.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventoryDropItem;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -713,6 +739,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Key7.started += instance.OnKey7;
                 @Key7.performed += instance.OnKey7;
                 @Key7.canceled += instance.OnKey7;
+                @InventoryDropItem.started += instance.OnInventoryDropItem;
+                @InventoryDropItem.performed += instance.OnInventoryDropItem;
+                @InventoryDropItem.canceled += instance.OnInventoryDropItem;
             }
         }
     }
@@ -729,7 +758,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         void OnPickup(InputAction.CallbackContext context);
         void OnHold(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
-        void OnInventoryDropItem(InputAction.CallbackContext context);
+        void OnSpecialUseItem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -740,5 +769,6 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         void OnKey5(InputAction.CallbackContext context);
         void OnKey6(InputAction.CallbackContext context);
         void OnKey7(InputAction.CallbackContext context);
+        void OnInventoryDropItem(InputAction.CallbackContext context);
     }
 }

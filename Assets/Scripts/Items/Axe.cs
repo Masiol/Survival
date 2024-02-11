@@ -11,8 +11,11 @@ public class Axe : GrabbableItem
     {
         base.Use();
     }
-    public override void SpecialUse()
+    public override void SpecialUse(bool _isPressed)
     {
-        base.SpecialUse();
+        if(_isPressed)
+        playerAnimatorController.PlayBoolAnimation(animTriggerName[1], true);
+        else
+            playerAnimatorController.PlayBoolAnimation(animTriggerName[1], false);
     }
 }
