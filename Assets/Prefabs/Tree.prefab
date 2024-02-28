@@ -469,10 +469,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2877827448547611251}
-  - component: {fileID: 2877827448547611254}
   - component: {fileID: 2877827448547611248}
   - component: {fileID: 2877827448547611255}
   - component: {fileID: 2877827448547611252}
+  - component: {fileID: 1757050124}
   m_Layer: 7
   m_Name: UpperTree
   m_TagString: Untagged
@@ -498,19 +498,6 @@ Transform:
   m_Father: {fileID: 2877827449360753222}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2877827448547611254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877827448547611250}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1.46, z: 0.4}
-  m_Center: {x: 0, y: 0.89, z: 0.03}
 --- !u!114 &2877827448547611248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c2763e6cc23ea4ca2e3049f91ce406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationToSpawnLogs: 3
+  durationToSpawnLogs: 4.5
   woodPrefab: {fileID: 3045473839162850458, guid: d81b9a5854fd5b945b354ee7fe3d663a, type: 3}
   woodSpawnPositionsParent: {fileID: 6558168058917108688}
 --- !u!114 &2877827448547611255
@@ -562,6 +549,20 @@ MonoBehaviour:
   - {fileID: 2877827447947824024}
   - {fileID: 2877827449604057869}
   healthStepsParent: {fileID: 2877827449322154727}
+--- !u!136 &1757050124
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877827448547611250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.16
+  m_Height: 1.93
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &2877827448780270506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,8 +1083,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3015979429331612568}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: -0.0076659, y: -0.007597916, z: -0.01102}
+  m_LocalScale: {x: 115.91, y: 115.91, z: 115.91}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2877827448547611251}
@@ -1166,8 +1167,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7550464043698031666}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2475, z: 0}
-  m_LocalScale: {x: 100, y: 191.12001, z: 100}
+  m_LocalPosition: {x: -0.0076659, y: -0.28, z: -0.01102}
+  m_LocalScale: {x: 115.91, y: 221.52722, z: 115.91}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2877827449360753222}

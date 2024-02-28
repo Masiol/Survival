@@ -11,10 +11,11 @@ public class ChoppableTree : MonoBehaviour, IDetectable
     private bool detectedChoppableTree;
     private bool playerInRange;
     private bool shownTreeHP;
-    private GameObject player;
 
+    private GameObject player;
     private DetectPlayer detectPlayer;
     private TreeHealthUI treeHealthUI;
+
     private void Start()
     {
         detectPlayer = GetComponentInParent<DetectPlayer>();
@@ -86,10 +87,9 @@ public class ChoppableTree : MonoBehaviour, IDetectable
         {
             Vector3 position = woodSpawnPositionsParent.GetChild(i).position;
             Quaternion rotation = woodSpawnPositionsParent.GetChild(i).rotation;
+
             Instantiate(woodPrefab, position, rotation);
         }
-
         Destroy(gameObject);
     }
-
 }
