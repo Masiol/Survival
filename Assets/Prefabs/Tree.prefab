@@ -559,10 +559,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.16
-  m_Height: 1.93
+  m_Radius: 0.25
+  m_Height: 1.64
   m_Direction: 1
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Center: {x: 0.03, y: 0.89, z: 0.05}
 --- !u!1 &2877827448780270506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 3109051747953382467}
   - component: {fileID: 2596544988647978988}
   - component: {fileID: 6447123643482540661}
-  - component: {fileID: 9117766258845274872}
+  - component: {fileID: 100874345}
   m_Layer: 0
   m_Name: DownTree
   m_TagString: Untagged
@@ -1224,8 +1224,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9117766258845274872
-BoxCollider:
+--- !u!136 &100874345
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1234,9 +1234,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0033322908, y: 0.0112, z: 0.0038777557}
-  m_Center: {x: 0.00048183446, y: -0.0039687, z: 0.0006926159}
+  m_Radius: 0.0019388776
+  m_Height: 0.00751096
+  m_Direction: 1
+  m_Center: {x: 0.00048183533, y: -0.0022396867, z: 0.00069263077}
 --- !u!1 &8354885801253834774
 GameObject:
   m_ObjectHideFlags: 0

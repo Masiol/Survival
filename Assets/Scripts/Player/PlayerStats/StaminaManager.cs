@@ -54,7 +54,6 @@ public class StaminaManager : MonoBehaviour, IStaminaConsumer
 
     private void HandleRun(bool isRunning)
     {
-        // Since Update is called every frame, we multiply by Time.deltaTime
         if (isRunning)
         {
             ConsumeStamina(config.runStaminaDrain * Time.deltaTime);

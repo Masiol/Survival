@@ -22,3 +22,4 @@ MonoBehaviour:
   itemType: 1
   StartRotation: {x: 180, y: 80, z: 0}
   Damage: 10
+  ConsumeStamina: 10
