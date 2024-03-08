@@ -112,9 +112,3 @@ MonoBehaviour:
   itemName: Stone Spear
   animTriggerName:
   - SpearAttack
-  throwForce: 15
-  throwAngle: 15
-  resolution: 15
-  launchAngle: 15
-  rigid: {fileID: 0}
-  targetDistance: 15
