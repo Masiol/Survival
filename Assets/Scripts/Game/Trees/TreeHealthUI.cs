@@ -13,7 +13,7 @@ public class TreeHealthUI : MonoBehaviour
     }
     private void Start()
     {
-        healthStepsParent.SetActive(false);
+        healthStepsParent.transform.parent.gameObject.SetActive(false);
         foreach (var step in healthSteps)
         {
             step.SetActive(true);
@@ -28,7 +28,7 @@ public class TreeHealthUI : MonoBehaviour
 
     public void SetVisibleObject(bool state)
     {
-        healthStepsParent.SetActive(state);
+        healthStepsParent.transform.parent.gameObject.SetActive(state);
     }
 
     private void UpdateHealthUI(int currentHealth)

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7886283734198062166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5907819120150241511}
+  m_Layer: 6
+  m_Name: DamageChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5907819120150241511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886283734198062166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.464, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5734802127809341990}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5730450946306411094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1621093843, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1433962087805124, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
       propertyPath: m_Name
@@ -37,11 +68,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4709074694299760, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.35
+      value: 7.335
       objectReference: {fileID: 0}
     - target: {fileID: 4709074694299760, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.817
+      value: 1.5050001
       objectReference: {fileID: 0}
     - target: {fileID: 4709074694299760, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
       propertyPath: m_LocalPosition.z
@@ -112,3 +143,23 @@ MonoBehaviour:
   itemName: Stone Spear
   animTriggerName:
   - SpearAttack
+--- !u!114 &470651405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5729633054884395666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d75088aa69a50e4eacda71c362b9691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedItem: {fileID: 11400000, guid: 7dda2290d05d1da4c9b3d6caa2c359e3, type: 2}
+  damagePoint: {fileID: 5907819120150241511}
+  damageRadius: 0.3
+--- !u!4 &5734802127809341990 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4709074694299760, guid: 7198ebc1636d9014b899ad585859bb94, type: 3}
+  m_PrefabInstance: {fileID: 5730450946306411094}
+  m_PrefabAsset: {fileID: 0}

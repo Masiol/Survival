@@ -9,7 +9,6 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private HealthConfig config;
 
     private IHealth playerHealth;
-    //private DamageController damageController;
 
     private void Awake()
     {
@@ -24,12 +23,7 @@ public class HealthManager : MonoBehaviour
 
         playerHealth = new Health(config.maxHealth);
         playerHealth.OnHealthChange += (currentHealth) => OnHealthChange?.Invoke(currentHealth);
-       // damageController = new DamageController(playerHealth);
     } 
-    public void ReceiveDamage(int damage)
-    {
-      //  damageController.DealDamage(damage);
-    }
 
     public void ChangeHealth(float amount)
     {

@@ -20,6 +20,7 @@ public class Health : IHealth
     {
         float newValue = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         currentHealth = newValue;
+        Debug.Log("change");
         OnHealthChange?.Invoke(currentHealth);
     }
 

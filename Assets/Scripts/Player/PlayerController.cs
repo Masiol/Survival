@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public CharacterController characterController;
     [HideInInspector] 
     public float currentSpeed;
+    [HideInInspector]
+    public HandItemSO currentHandItemSO;
+    [HideInInspector]
+    public GameObject currentItemGO;
 
     [SerializeField] private float walkAccelerationTime = 0.5f;
     [SerializeField] private float runAccelerationTime = 0.3f;
@@ -24,13 +28,14 @@ public class PlayerController : MonoBehaviour
     private float targetSpeed;
     private bool canPlayerMove = true;
     private CameraController cameraController;
+    private AnimatorListener animatorListener;
 
-    public HandItemSO currentHandItemSO;
-    public GameObject currentItemGO;
+    
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         cameraController = GetComponentInChildren<CameraController>();
+        animatorListener = GetComponent<AnimatorListener>();
     }
     private void Start()
     {
@@ -72,6 +77,7 @@ public class PlayerController : MonoBehaviour
     private void SetCurrentHoldItem(HandItemSO _item)
     {
         currentHandItemSO = _item;
+        animatorListener.handItem = _item;
         GetComponent<PlayerAnimatorController>().Equip();
 
         if (currentItemGO != null)

@@ -6,13 +6,14 @@ public class ChoppableTree : MonoBehaviour, IDetectable
 {
     [SerializeField] private float durationToSpawnLogs;
     [SerializeField] private GameObject woodPrefab;
+    [SerializeField] private GameObject stickPrefab; // Dodano prefab patyka
     [SerializeField] private Transform woodSpawnPositionsParent;
+    [SerializeField] private Transform stickSpawnPositionsParent; // Dodano rodzica pozycji spawnu patyków
 
     private bool detectedChoppableTree;
     private bool playerInRange;
     private bool shownTreeHP;
 
-    private GameObject player;
     private DetectPlayer detectPlayer;
     private TreeHealthUI treeHealthUI;
 
@@ -30,9 +31,9 @@ public class ChoppableTree : MonoBehaviour, IDetectable
     {
         if (detectedChoppableTree || playerInRange)
         {
-            if(detectedChoppableTree && playerInRange)
+            if (detectedChoppableTree && playerInRange)
             {
-                if(!shownTreeHP)
+                if (!shownTreeHP)
                 {
                     treeHealthUI.SetVisibleObject(true);
                     shownTreeHP = true;
@@ -40,7 +41,7 @@ public class ChoppableTree : MonoBehaviour, IDetectable
             }
             else
             {
-                if(shownTreeHP)
+                if (shownTreeHP)
                 {
                     treeHealthUI.SetVisibleObject(false);
                     shownTreeHP = false;
@@ -67,7 +68,7 @@ public class ChoppableTree : MonoBehaviour, IDetectable
 
     public void OnTriggered()
     {
-        if(detectedChoppableTree && playerInRange)
+        if (detectedChoppableTree && playerInRange)
         {
             GetComponent<TreeHealth>()?.TakeDamage(1);
         }
@@ -76,10 +77,10 @@ public class ChoppableTree : MonoBehaviour, IDetectable
     public void ApplyPhysics()
     {
         gameObject.AddComponent<Rigidbody>();
-        StartCoroutine(SpawnLogs(durationToSpawnLogs));
+        StartCoroutine(SpawnItems(durationToSpawnLogs));
     }
 
-    private IEnumerator SpawnLogs(float _duration)
+    private IEnumerator SpawnItems(float _duration)
     {
         yield return new WaitForSeconds(_duration);
 
@@ -90,6 +91,15 @@ public class ChoppableTree : MonoBehaviour, IDetectable
 
             Instantiate(woodPrefab, position, rotation);
         }
+
+        for (int i = 0; i < stickSpawnPositionsParent.childCount; i++)
+        {
+            Vector3 position = stickSpawnPositionsParent.GetChild(i).position;
+            Quaternion rotation = stickSpawnPositionsParent.GetChild(i).rotation;
+
+            Instantiate(stickPrefab, position, rotation);
+        }
+
         Destroy(gameObject);
     }
 }

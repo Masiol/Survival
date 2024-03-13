@@ -22,9 +22,5 @@ public class Spear : GrabbableItem
     public override void SpecialUse(bool _isPressed)
     {
         if (!_isPressed) return;
-       /* if (inventory != null)
-        {
-            inventory.RemoveItemFromInventory();
-        }*/
     }
 }

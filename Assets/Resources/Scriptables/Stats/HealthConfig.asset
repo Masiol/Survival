@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ac6d0400528b440b17226db418e39f, type: 3}
+  m_Script: {fileID: 11500000, guid: ca1c868a05bd53b4b87dcb145c45b8cc, type: 3}
   m_Name: HealthConfig
   m_EditorClassIdentifier: 
   maxHealth: 100
