@@ -29,9 +29,7 @@ public class Inventory : MonoBehaviour
 
     private int currentDragSlotIndex = -1;
     private int lastHotBarSelectedSlot = 0;
-
     
-
     private void Start()
     {
         InitializeInventory();
@@ -155,6 +153,28 @@ public class Inventory : MonoBehaviour
             }
         }
         _slot.SetItem(null);
+    }
+
+    public List<Slot> GetInventorySlots()
+    {
+        return inventorySlots;
+    }
+    public int CountItemsOfType(ItemSO itemSO)
+    {
+        int itemCount = 0;
+
+        foreach (Slot slot in allInventorySlots)
+        {
+            ItemSO item = slot.GetItem();
+            if (item != null && item.itemName == itemSO.itemName)
+            {
+                itemCount += item.itemQuantity; 
+            }
+        }
+
+        Debug.Log("Liczba przedmiotów typu " + itemSO.itemName + ": " + itemCount);
+
+        return itemCount;
     }
     public void RemoveItemFromInventory()
     {

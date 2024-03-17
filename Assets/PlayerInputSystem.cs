@@ -109,6 +109,15 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Build"",
+                    ""type"": ""Button"",
+                    ""id"": ""56d3a2bc-35d7-4296-8858-f2e3acdab118"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""UseItem"",
                     ""type"": ""Button"",
                     ""id"": ""9f3c02aa-72e7-4540-ad07-5aabc58e084c"",
@@ -290,6 +299,17 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SpecialUseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""357959b0-3507-4cff-8a5c-f0383cc68d57"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -477,6 +497,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
         m_Player_Hold = m_Player.FindAction("Hold", throwIfNotFound: true);
+        m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_SpecialUseItem = m_Player.FindAction("SpecialUseItem", throwIfNotFound: true);
         // UI
@@ -557,6 +578,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pickup;
     private readonly InputAction m_Player_Hold;
+    private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_SpecialUseItem;
     public struct PlayerActions
@@ -572,6 +594,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
         public InputAction @Hold => m_Wrapper.m_Player_Hold;
+        public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @SpecialUseItem => m_Wrapper.m_Player_SpecialUseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -610,6 +633,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Hold.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
                 @Hold.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
                 @Hold.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHold;
+                @Build.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuild;
+                @Build.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuild;
+                @Build.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuild;
                 @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
@@ -647,6 +673,9 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
                 @Hold.started += instance.OnHold;
                 @Hold.performed += instance.OnHold;
                 @Hold.canceled += instance.OnHold;
+                @Build.started += instance.OnBuild;
+                @Build.performed += instance.OnBuild;
+                @Build.canceled += instance.OnBuild;
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
@@ -757,6 +786,7 @@ public partial class @PlayerInputSystem : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
         void OnHold(InputAction.CallbackContext context);
+        void OnBuild(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnSpecialUseItem(InputAction.CallbackContext context);
     }

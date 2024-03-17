@@ -18,6 +18,10 @@ public class GameOptions : MonoBehaviour
     [SerializeField] private float interactionDistance;   
     public float InteractionDistance => interactionDistance;
 
+    [Range(1f, 35f)]
+    [SerializeField] private float buildDistance;
+    public float BuildDistance => buildDistance;
+
     [Header("Outlines")]
     [SerializeField] private Outline.Mode outlineMode = Outline.Mode.OutlineAll;
     public Outline.Mode OutlineMode => outlineMode;

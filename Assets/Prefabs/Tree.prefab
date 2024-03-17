@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464124015623847153}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.289, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -396,7 +396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.054}
+  m_AnchoredPosition: {x: 0, y: -0.22}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2877827448168266876
@@ -489,7 +489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877827448547611250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.091, z: 0}
+  m_LocalPosition: {x: 0, y: 0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -564,7 +564,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
-  m_Height: 1.64
+  m_Height: 3.1
   m_Direction: 1
   m_Center: {x: 0.03, y: 0.89, z: 0.05}
 --- !u!136 &6680731684621064304
@@ -580,7 +580,7 @@ CapsuleCollider:
   m_Radius: 0.37
   m_Height: 4.76
   m_Direction: 1
-  m_Center: {x: 0.03, y: 0.89, z: 0.05}
+  m_Center: {x: 0.03, y: 1.24, z: 0.05}
 --- !u!1 &2877827448780270506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,8 +1101,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3015979429331612568}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0076659, y: -0.007597916, z: -0.01102}
-  m_LocalScale: {x: 115.91, y: 115.91, z: 115.91}
+  m_LocalPosition: {x: -0.0076659, y: -1.075, z: -0.01102}
+  m_LocalScale: {x: 115.91, y: 173.22751, z: 115.91}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2877827448547611251}
@@ -1349,9 +1349,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0019388776
-  m_Height: 0.00751096
+  m_Height: 0.0081096
   m_Direction: 1
-  m_Center: {x: 0.00048183533, y: -0.0022396867, z: 0.00069263077}
+  m_Center: {x: 0.00048183533, y: -0.00139687, z: 0.00069263077}
 --- !u!208 &3324273151584042379
 NavMeshObstacle:
   m_ObjectHideFlags: 0
