@@ -162,6 +162,6 @@ public class BuildableElement : MonoBehaviour, IBuildable
 
     private void UpdateUIOnCollectedAmountChanged()
     {
-        FindObjectOfType<BuildableUI>()?.UpdateItemUI(requiredItems);
+        transform.root.GetComponentInChildren<BuildableUI>()?.UpdateItemUI(requiredItems);
     }
 }
