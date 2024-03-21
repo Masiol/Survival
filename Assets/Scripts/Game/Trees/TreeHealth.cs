@@ -18,9 +18,14 @@ public class TreeHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         OnHealthChanged?.Invoke(currentHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && GetComponent<Tree>().GetTreeType() == TreeType.Tree)
         {
-            GetComponent<ChoppableTree>().ApplyPhysics();
+            GetComponent<Tree>().ApplyPhysics();
+            GetComponentInParent<TreeManager>().CanChopStump = true;
+        }
+        if (currentHealth <= 0 && GetComponent<Tree>().GetTreeType() == TreeType.Stump)
+        {
+            GetComponent<Tree>().DestroyObject();
         }
     }
     public int GetCurrentHealth()
